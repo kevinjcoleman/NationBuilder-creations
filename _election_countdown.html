@@ -1,0 +1,31 @@
+<style>
+  
+</style>
+{% assign seconds_til_election = settings.election.election_at | seconds_until %}
+{% assign days_til_election = settings.election.election_at | days_until %}
+{% assign current_day = settings.stats_updated_at | date: '%Y-%m-%d' %}
+{% assign election_day = settings.election.election_at | date: '%Y-%m-%d' %}
+{% if seconds_til_election > 0 %}
+	<div class="event-detail">
+  		<div class="subtext">
+      	<div id="pre-countdown" class="countdown"></div>
+     <h3 class="subhead">Polls open in {{days_til_election}} {% if days_til_election >1 %}days{% else %}day{%endif%}</h3>
+    </div>
+  </div>
+{% elsif election_day == current_day %}
+<h2>Today's election day! Get out and vote!!!</h2>
+{% else %}
+{% endif %}
+
+<script type="text/javascript" src="/javascripts/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="/assets/liquid/money-bomb.js"></script>
+<script type="text/javascript">
+  $(function () {
+    var moneyBomb = new NB.Liquid.MoneyBomb();
+
+    moneyBomb.setCountdown({
+      $el : $('#pre-countdown'),
+      until: +{{ seconds_til_election }}
+    });
+  });
+</script>
