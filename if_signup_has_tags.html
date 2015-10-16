@@ -1,0 +1,12 @@
+<!---Checks to see if signup has tags, and if they do, prints out a tag list. Should already be in a for loop of signups when using this.--->
+
+<!---Assigns a value of 0 to a variable, and then add +1 for every tag the signup has-->
+{% assign tag_count = 0 %}
+{% for tag in signup.tags  %}
+    {% assign tag_count = tag_count | plus: 1 %}
+{% endfor %}
+
+<!---Checks to see if the signup has any tags, if they do it prints out all their tags.-->
+{% if tag_count > 0%}
+    {{ signup.tag_list }}
+{% endif %}
