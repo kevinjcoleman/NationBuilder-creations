@@ -1,0 +1,10 @@
+<!---Include this at top of your layout.html, replace the <body> tag with the one below to style every subpage of the parent page with the same styling. -->
+
+{% assign top_parent = page.slug %}
+{% if page.has_parent? %}
+  {% for ancestor in page.ancestors limit:1 %}
+   {% assign top_parent = ancestor.slug %}
+  {% endfor %}
+{% endif %}
+  
+<body class="aware-theme v2-theme toplevel-{{top_parent}} {{ page.page_class_name }} {% if page.is_homepage? == true %}homepage{% endif %} js">
